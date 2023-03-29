@@ -1,0 +1,10 @@
+datadog自体の障害を通知するスクリプト
+ datadog_status_monitor.pyは次のように       if re.match(r"major_outage|partial_outage", service_status):
+outageの状態によって送信の有無を判断してる。
+datadogのステータス更新が入らないと正常荷動いてるか確認できない（rssの差分をこっちで用意したりしないと検証できないのでめんどくさい）
+あとインターバル設定が入っていない。
+
+
+とりあえずフィードで更新があったら送信するのが
+datadgo_datus_int.py
+これはチェック時刻に対して新しいフィードが入ると送信される。
