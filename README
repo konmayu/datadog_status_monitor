@@ -9,6 +9,11 @@ datadogのステータス更新が入らないと正常荷動いてるか確認�
 datadgo_datus_int.py
 これはチェック時刻に対して新しいフィードが入ると送信される。
 
+oauth.pyはwebhook urlからoauthのトークンを使った方式に変えたもの。
+
+
 ## 利用方法
+デフォルトはoauth.pyが実行
 コンテナの起動と実行は docker-start.shを実行する。
 .envファイルでslackのエンドポイントを指定する
+終了時はdocker-stop.shを実行する。停止とコンテナ削除も実行
