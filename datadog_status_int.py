@@ -4,11 +4,14 @@ import feedparser
 import requests
 import sys
 from datetime import datetime
+from dotenv import load_dotenv
+
+# .envをロード
+load_dotenv()
 
 DATADOG_STATUS_FEED_URL = "https://status.datadoghq.com/history.rss"
 INTERVAL_SECONDS = 60 * 5  # 5分ごとにチェック
-WEBHOOK_URL = "https://hooks.slack.com/services/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"  # 通知を送信するWebhook URL
-#LOG_FILE_PATH = "/root/develop/python/excute.log"  # ログファイルのパスを指定
+WEBHOOK_URL = os.getenv("DATADOG_WEBHOOK_URL")
 
 error_count = 0 #except処理のエラー回数初期値を定義
 max_errors = 3  #except処理のエラー回数最大値を定義
@@ -27,7 +30,7 @@ def main():
     with open(log_file_path, "a") as f:
         original_stdout = sys.stdout
         try:
-            sys.stdout = f  # 標準出力をログファイルにリダイレクト
+            sys.stdout = f  # 標準出力をログフイルにリダイレクト
             print("Script started")
             #スクリプト実行開始を通知する
             send_notification(f"script is started, LogFileName is {log_file_name} and path {log_file_path}")
@@ -60,4 +63,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
