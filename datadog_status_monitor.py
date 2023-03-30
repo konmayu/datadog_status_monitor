@@ -1,8 +1,12 @@
 import requests
 import feedparser
 import re
+from dotenv import load_dotenv
 
-WEBHOOK_URL = "https://hooks.slack.com/services/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"
+# .envをロード
+load_dotenv()
+
+WEBHOOK_URL = os.getenv("DATADOG_WEBHOOK_URL")
 
 def send_notification(is_normal_status, service_name=None, incident_status=None, incident_details=None, incident_created=None, incident_updated=None, incident_resolved=None):
     if is_normal_status:
